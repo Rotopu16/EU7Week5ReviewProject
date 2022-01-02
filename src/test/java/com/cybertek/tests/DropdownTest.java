@@ -30,9 +30,9 @@ public class DropdownTest {
     }
 
     @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
+//    public void tearDown(){
+//        driver.quit();
+//    }
 
     @Test
 
@@ -54,6 +54,19 @@ public class DropdownTest {
         String actualSelectedOption = productDropDown.getFirstSelectedOption().getText();
 
         Assert.assertEquals(actualSelectedOption,expectedSelectedOption, "verify options are same");
+
+        // 5. Then select FamilyAlbum, make quantity 2, and click Calculate,
+
+        productDropDown.selectByValue("FamilyAlbum");
+
+        WebElement quantityBox = driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtQuantity"));
+
+        quantityBox.sendKeys("2");
+
+        //    6. Then verify Total is equal to Quantity*PricePerUnit
+
+        WebElement calculateButton = driver.findElement(By.className("btn_dark"));
+        calculateButton.click();
 
 
     }
